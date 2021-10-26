@@ -8,20 +8,22 @@
 #include <string>
 using namespace std;
 
-int MyRand(const int a, const int b, const int c, const int m, const int i, const int V1, const int V2)
+int MyRand(const int a, const int b, const int c, const int m, const int i, const int V1, const int V2, int level, int &depth)
 {
+	if (level > depth)
+		depth = level;
 	if (i == 1)
 		return V1;
 	if (i == 2)
 		return V2;
-	return (a * MyRand(a, b, c, m, i - 1, V1, V2) + b * MyRand(a, b, c, m, i - 1, V1, V2) + c) % m;
+	return (a * MyRand(a, b, c, m, i - 1, V1, V2, level + 1, depth) + b * MyRand(a, b, c, m, i - 2, V1, V2, level + 1, depth) + c) % m;
 }
 
 int main()
 {
 	srand(time(0));
 
-	int a, b, c, m, i;
+	int a, b, c, m, i, depth;
 
 	cout << "a = "; cin >> a;
 	cout << "b = "; cin >> b;
@@ -30,14 +32,15 @@ int main()
 	cout << "i(Vi) = "; cin >> i;
 
 	int V1 = rand(), V2 = rand();
-	cout << MyRand(a, b, c, m, i, V1, V2) << endl;
+	cout << "MyRand() = " << MyRand(a, b, c, m, i, V1, V2, 1, depth) << endl;
+	cout << "depth = " << depth << endl;
 
-	/*while (true)
-	{
-		int V1 = rand(), V2 = rand();
-		int rnd = MyRand(1053, 13150, 41841, 110495, 11, V1, V2);
-		cout << rnd << " ";
-	}*/
+	//while (true)
+	//{
+	//	int V1 = rand(), V2 = rand();
+	//	int rnd = MyRand(a, b, c, m, i, V1, V2, 1, depth);
+	//	cout << rnd << " ";
+	//}
 
 
 	return 0;
