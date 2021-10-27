@@ -16,7 +16,8 @@ int MyRand(const int a, const int b, const int c, const int m, const int i, cons
 		return V1;
 	if (i == 2)
 		return V2;
-	return (a * MyRand(a, b, c, m, i - 1, V1, V2, level + 1, depth) + b * MyRand(a, b, c, m, i - 2, V1, V2, level + 1, depth) + c) % m;
+	return (a * MyRand(a, b, c, m, i - 1, V1, V2, level + 1, depth) 
+		+ b * MyRand(a, b, c, m, i - 2, V1, V2, level + 1, depth) + c) % m;
 }
 
 int main()
